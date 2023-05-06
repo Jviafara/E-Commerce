@@ -1,14 +1,23 @@
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
+import { StoreProvider } from './Store';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <StoreProvider>
+            <HelmetProvider>
+                <PayPalScriptProvider deferLoading={true}>
+                    <App />
+                </PayPalScriptProvider>
+            </HelmetProvider>
+        </StoreProvider>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
